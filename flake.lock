@@ -1,0 +1,88 @@
+{
+  "nodes": {
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1623660459,
+        "narHash": "sha256-OTmOsh43po7r5F9s9H6lVCBQ2b0FikWbmiwLbMAGRdw=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "98c8d36b1828009b20f12544214683c7489935a1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "mach-nix": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "pypi-deps-db": [
+          "pypi-deps-db"
+        ]
+      },
+      "locked": {
+        "lastModified": 1623358022,
+        "narHash": "sha256-BhotqZQcn++WJgZhPosOrZFGrJVRZcOe6HUkdKzrV28=",
+        "owner": "DavHau",
+        "repo": "mach-nix",
+        "rev": "77fc01c0e1a92d00d5b8ebeef8fac688a9179350",
+        "type": "github"
+      },
+      "original": {
+        "owner": "DavHau",
+        "repo": "mach-nix",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1623580589,
+        "narHash": "sha256-Ayp1cjXpwFCkAiWUE46rj9APTltsiEBdIs2+cj+U7+c=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "fa0326ce5233f7d592271df52c9d0812bec47b84",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "pypi-deps-db": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1622408406,
+        "narHash": "sha256-3pd+uflBpqTaBJWYkOlXpMWpQAmm6lh2JvbNoUPgWok=",
+        "owner": "DavHau",
+        "repo": "pypi-deps-db",
+        "rev": "71447b5cea3eb5f833e70a20421be958d4c6bb3f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "DavHau",
+        "repo": "pypi-deps-db",
+        "rev": "71447b5cea3eb5f833e70a20421be958d4c6bb3f",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "mach-nix": "mach-nix",
+        "nixpkgs": "nixpkgs",
+        "pypi-deps-db": "pypi-deps-db"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
