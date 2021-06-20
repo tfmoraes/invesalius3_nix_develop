@@ -76,9 +76,9 @@
                   ] ++ old.buildInputs;
 
                   buildPhase = ''
-                    ${localPython.interpreter} build.py -v build_wx
+                    ${localPython.interpreter} build.py -v --jobs=8 build_wx
                     ${localPython.interpreter} build.py -v dox etg --nodoc sip
-                    ${localPython.interpreter} build.py -v build_py
+                    ${localPython.interpreter} build.py -v --jobs=8 build_py
                   '';
 
                   installPhase = ''
