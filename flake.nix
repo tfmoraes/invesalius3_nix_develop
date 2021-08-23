@@ -7,8 +7,7 @@
       url = "github:numtide/flake-utils";
     };
     pypi-deps-db = {
-      url = "github:DavHau/pypi-deps-db/71447b5cea3eb5f833e70a20421be958d4c6bb3f";
-      flake = false;
+      url = "github:DavHau/pypi-deps-db/5b00042b6a01bd250e61cfe5101235ef639b55c5";
     };
     mach-nix = {
       url = github:DavHau/mach-nix;
@@ -24,11 +23,13 @@
         pkgs = import nixpkgs { inherit system; };
         mach-nix-utils = import mach-nix {
           inherit pkgs;
+          python = "python38";
         };
 
         my_python = mach-nix-utils.mkPython {
           requirements = ( builtins.readFile ./requirements.txt ) + ''
             ipython
+            keras2onnx
           '';
 
           _.enum34.phases = "installPhase";
