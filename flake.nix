@@ -7,7 +7,7 @@
       url = "github:numtide/flake-utils";
     };
     pypi-deps-db = {
-      url = "github:DavHau/pypi-deps-db/17b1e5a1291796af054eeaa0e75720723806661b";
+      url = "github:DavHau/pypi-deps-db";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     mach-nix = {
@@ -21,7 +21,10 @@
   outputs = { self, nixpkgs, flake-utils, mach-nix, pypi-deps-db }:
     flake-utils.lib.eachSystem [ "x86_64-linux" ] (system:
       let
-        pkgs = import nixpkgs { inherit system; };
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
         mach-nix-utils = import mach-nix {
           inherit pkgs;
           python = "python38";
@@ -30,9 +33,10 @@
         };
 
         my_python = mach-nix-utils.mkPython {
-          requirements = ( builtins.readFile ./requirements.txt ) + ''
+          requirements = (builtins.readFile ./requirements.txt) + ''
             ipython
             setuptools_rust
+            pyacvd
           '';
 
           _.enum34.phases = "installPhase";
@@ -93,6 +97,11 @@
             )
           ];
         };
+        gpu_libs = with pkgs; [
+          cudatoolkit_11
+          cudnn_cudatoolkit_11
+          ocl-icd
+        ];
       in
       {
         devShell = pkgs.mkShell {
@@ -102,12 +111,15 @@
             gtk3
             glib
             gsettings-desktop-schemas
-          ];
+            clinfo
+          ] ++ gpu_libs;
 
           nativeBuildInputs = with pkgs; [
             gobject-introspection
             wrapGAppsHook
           ];
+
+          LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath (gpu_libs ++ [ "/run/opengl-driver" ]);
         };
       });
 }
