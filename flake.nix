@@ -37,6 +37,7 @@
             ipython
             setuptools_rust
             pyacvd
+            dipy
           '';
 
           _.enum34.phases = "installPhase";
