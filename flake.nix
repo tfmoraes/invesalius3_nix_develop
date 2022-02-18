@@ -122,5 +122,7 @@
 
           LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath (gpu_libs ++ [ "/run/opengl-driver" ]);
         };
+
+        defaultPackage = my_python;
       });
 }
