@@ -16,4 +16,5 @@ jobs:
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
     - run: nix build
+    - run: nix develop -c true
     - run: nix shell -c echo "OK"
