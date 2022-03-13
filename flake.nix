@@ -38,7 +38,10 @@
             setuptools_rust
             pyacvd
             dipy
+            scikit-learn
           '';
+
+          providers.wxpython = "nixpkgs";
 
           _.enum34.phases = "installPhase";
           _.enum34.installPhase = "mkdir $out";
@@ -46,57 +49,57 @@
           _.plaidml.pipInstallFlags = "--no-deps";
           _.plaidml-keras.pipInstallFlags = "--no-deps";
 
-          overridesPost = [
-            (
-              self: super: {
-                wxpython = super.wxpython.overridePythonAttrs (old: rec{
-                  DOXYGEN = "${pkgs.doxygen}/bin/doxygen";
+          # overridesPost = [
+          #   (
+          #     self: super: {
+          #       wxpython = super.wxpython.overridePythonAttrs (old: rec{
+          #         DOXYGEN = "${pkgs.doxygen}/bin/doxygen";
 
-                  localPython = self.python.withPackages (ps: with ps; [
-                    setuptools
-                    numpy
-                    six
-                  ]);
+          #         localPython = self.python.withPackages (ps: with ps; [
+          #           setuptools
+          #           numpy
+          #           six
+          #         ]);
 
-                  nativeBuildInputs = with pkgs; [
-                    which
-                    doxygen
-                    gtk3
-                    pkg-config
-                    autoPatchelfHook
-                  ] ++ old.nativeBuildInputs;
+          #         nativeBuildInputs = with pkgs; [
+          #           which
+          #           doxygen
+          #           gtk3
+          #           pkg-config
+          #           autoPatchelfHook
+          #         ] ++ old.nativeBuildInputs;
 
-                  buildInputs = with pkgs; [
-                    gtk3
-                    webkitgtk
-                    ncurses
-                    SDL2
-                    xorg.libXinerama
-                    xorg.libSM
-                    xorg.libXxf86vm
-                    xorg.libXtst
-                    xorg.xorgproto
-                    gst_all_1.gstreamer
-                    gst_all_1.gst-plugins-base
-                    libGLU
-                    libGL
-                    libglvnd
-                    mesa
-                  ] ++ old.buildInputs;
+          #         buildInputs = with pkgs; [
+          #           gtk3
+          #           webkitgtk
+          #           ncurses
+          #           SDL2
+          #           xorg.libXinerama
+          #           xorg.libSM
+          #           xorg.libXxf86vm
+          #           xorg.libXtst
+          #           xorg.xorgproto
+          #           gst_all_1.gstreamer
+          #           gst_all_1.gst-plugins-base
+          #           libGLU
+          #           libGL
+          #           libglvnd
+          #           mesa
+          #         ] ++ old.buildInputs;
 
-                  buildPhase = ''
-                    ${localPython.interpreter} build.py -v --jobs=8 build_wx
-                    ${localPython.interpreter} build.py -v dox etg --nodoc sip
-                    ${localPython.interpreter} build.py -v --jobs=8 build_py
-                  '';
+          #         buildPhase = ''
+          #           ${localPython.interpreter} build.py -v --jobs=8 build_wx
+          #           ${localPython.interpreter} build.py -v dox etg --nodoc sip
+          #           ${localPython.interpreter} build.py -v --jobs=8 build_py
+          #         '';
 
-                  installPhase = ''
-                    ${localPython.interpreter} setup.py install --skip-build --prefix=$out
-                  '';
-                });
-              }
-            )
-          ];
+          #         installPhase = ''
+          #           ${localPython.interpreter} setup.py install --skip-build --prefix=$out
+          #         '';
+          #       });
+          #     }
+          #   )
+          # ];
         };
         gpu_libs = with pkgs; [
           cudatoolkit_11
