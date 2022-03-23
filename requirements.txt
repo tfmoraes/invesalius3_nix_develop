@@ -15,5 +15,5 @@ scipy==1.7.1
 vtk==9.0.3
 wxPython==4.1.1
 Theano==1.0.5
-torch==1.9.1
+torch==1.11.0
 pyacvd==0.2.7

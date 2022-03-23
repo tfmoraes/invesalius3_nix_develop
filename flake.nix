@@ -9,9 +9,10 @@
     pypi-deps-db = {
       url = "github:DavHau/pypi-deps-db";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.mach-nix.follows = "mach-nix";
     };
     mach-nix = {
-      url = github:DavHau/mach-nix;
+      url = "github:DavHau/mach-nix";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pypi-deps-db.follows = "pypi-deps-db";
