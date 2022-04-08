@@ -26,20 +26,24 @@
           inherit system;
           config.allowUnfree = true;
         };
-        mach-nix-utils = import mach-nix {
-          inherit pkgs;
-          python = "python38";
-          pypiDataRev = pypi-deps-db.rev;
-          pypiDataSha256 = pypi-deps-db.narHash;
-        };
+        # mach-nix-utils = import mach-nix {
+        #   inherit pkgs;
+        #   python = "python38";
+        #   pypiDataRev = pypi-deps-db.rev;
+        #   pypiDataSha256 = pypi-deps-db.narHash;
+        # };
+        mach-nix-utils = mach-nix.lib.${system};
 
         my_python = mach-nix-utils.mkPython {
+          python = "python38";
           requirements = (builtins.readFile ./requirements.txt) + ''
             ipython
             setuptools_rust
             pyacvd
             dipy
             scikit-learn
+            onnxruntime-gpu
+            itk-elastix
           '';
 
           providers.wxpython = "nixpkgs";
@@ -50,9 +54,17 @@
           _.plaidml.pipInstallFlags = "--no-deps";
           _.plaidml-keras.pipInstallFlags = "--no-deps";
 
-          # overridesPost = [
-          #   (
-          #     self: super: {
+          _.numpy.propagatedBuildInputs.add = [pkgs.zlib];
+
+          # overridesPost = [(
+          #   self: super: {
+          #     jax = super.jax.overridePythonAttrs (old: rec{
+          #       propagatedBuildInputs = (old.propagatedBuildInputs or [ ]) ++ [
+          #         self.jaxlib
+          #       ];
+          #     });
+          #   })
+          # ];
           #       wxpython = super.wxpython.overridePythonAttrs (old: rec{
           #         DOXYGEN = "${pkgs.doxygen}/bin/doxygen";
 
@@ -104,7 +116,8 @@
         };
         gpu_libs = with pkgs; [
           cudatoolkit_11
-          # cudnn_8_3_cudatoolkit_11
+          cudatoolkit_11.out
+          cudnn_8_3_cudatoolkit_11
           ocl-icd
         ];
       in
@@ -117,6 +130,7 @@
             glib
             gsettings-desktop-schemas
             clinfo
+            zlib
           ] ++ gpu_libs;
 
           nativeBuildInputs = with pkgs; [
