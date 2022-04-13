@@ -115,9 +115,9 @@
           # ];
         };
         gpu_libs = with pkgs; [
-          cudatoolkit_11
-          cudatoolkit_11.out
-          cudnn_8_3_cudatoolkit_11
+          cudaPackages_11.cudatoolkit
+          cudaPackages_11.cudatoolkit.lib
+          cudaPackages_11.cudnn
           ocl-icd
         ];
       in
