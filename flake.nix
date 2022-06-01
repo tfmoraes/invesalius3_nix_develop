@@ -12,7 +12,7 @@
       inputs.mach-nix.follows = "mach-nix";
     };
     mach-nix = {
-      url = "github:bjornfor/mach-nix/adapt-to-make-binary-wrapper";
+      url = "github:DavHau/mach-nix";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pypi-deps-db.follows = "pypi-deps-db";

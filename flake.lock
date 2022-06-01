@@ -28,16 +28,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1652117564,
-        "narHash": "sha256-4UMrLi4pWb1gQt5ZBJ4y9mJ+HBWR+wtZ3hh6Nh3X8p4=",
-        "owner": "bjornfor",
+        "lastModified": 1654084003,
+        "narHash": "sha256-j/XrVVistvM+Ua+0tNFvO5z83isL+LBgmBi9XppxuKA=",
+        "owner": "DavHau",
         "repo": "mach-nix",
-        "rev": "afce97038da4c397fd223fc608e6fe4930e3050d",
+        "rev": "7e14360bde07dcae32e5e24f366c83272f52923f",
         "type": "github"
       },
       "original": {
-        "owner": "bjornfor",
-        "ref": "adapt-to-make-binary-wrapper",
+        "owner": "DavHau",
         "repo": "mach-nix",
         "type": "github"
       }
@@ -85,11 +84,11 @@
         "pypiIndex": "pypiIndex"
       },
       "locked": {
-        "lastModified": 1654029241,
-        "narHash": "sha256-HqAUcXTS+ZfXeC4ufzqGyt7KR4VyjORcJwS9XjIifUA=",
+        "lastModified": 1654073190,
+        "narHash": "sha256-O+qQaALg+mFAwxVxRviGme9/s2m3RT5cAlwWiXmKOCk=",
         "owner": "DavHau",
         "repo": "pypi-deps-db",
-        "rev": "bd980df69be90a494ce6d1b1c955950c303cfa53",
+        "rev": "317719c305a4b1bd97cfec9366d118228fefa690",
         "type": "github"
       },
       "original": {
@@ -101,11 +100,11 @@
     "pypiIndex": {
       "flake": false,
       "locked": {
-        "lastModified": 1654017662,
-        "narHash": "sha256-vm2LrKA7MJGxmpUy4/+XIWr2WidZO3muEdlCXCvWAk8=",
+        "lastModified": 1654063596,
+        "narHash": "sha256-Fn1HQ9VFzxIcWs6HhKURrXvmofhGCw3L9x7y8BPFg7U=",
         "owner": "davhau",
         "repo": "nix-pypi-fetcher",
-        "rev": "8181bfb363e11fe3bf770c73289d21226d5dc48a",
+        "rev": "9298e1fe5b78454bc1e4859edd3faad9e9700ef5",
         "type": "github"
       },
       "original": {
