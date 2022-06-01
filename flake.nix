@@ -44,6 +44,7 @@
             scikit-learn
             onnxruntime-gpu
             itk-elastix
+            tensorboard
           '';
 
           providers.wxpython = "nixpkgs";
@@ -131,6 +132,7 @@
             gsettings-desktop-schemas
             clinfo
             zlib
+            cmake
           ] ++ gpu_libs;
 
           nativeBuildInputs = with pkgs; [
