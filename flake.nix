@@ -19,24 +19,46 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, mach-nix, pypi-deps-db }:
-    flake-utils.lib.eachSystem [ "x86_64-linux" ] (system:
-      let
-        pkgs = import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-        };
-        # mach-nix-utils = import mach-nix {
-        #   inherit pkgs;
-        #   python = "python38";
-        #   pypiDataRev = pypi-deps-db.rev;
-        #   pypiDataSha256 = pypi-deps-db.narHash;
-        # };
-        mach-nix-utils = mach-nix.lib.${system};
+  outputs = {
+    self,
+    nixpkgs,
+    flake-utils,
+    mach-nix,
+    pypi-deps-db,
+  }:
+    flake-utils.lib.eachSystem ["x86_64-linux"] (system: let
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+      # mach-nix-utils = import mach-nix {
+      #   inherit pkgs;
+      #   python = "python38";
+      #   pypiDataRev = pypi-deps-db.rev;
+      #   pypiDataSha256 = pypi-deps-db.narHash;
+      # };
+      mach-nix-utils = mach-nix.lib.${system};
 
-        my_python = mach-nix-utils.mkPython {
-          python = "python38";
-          requirements = (builtins.readFile ./requirements.txt) + ''
+      vedo = mach-nix-utils.buildPythonPackage {
+        pname = "vedo";
+        version = "2022.2.3";
+        src = mach-nix-utils.fetchPypiSdist "vedo" "2022.2.3";
+        python = "python38";
+        requirements = ''
+        vtk
+        Deprecated
+        '';
+        postUnpack = ''
+          substituteInPlace vedo-*/setup.py --replace "<9.1.0" ""
+          cat vedo-*/setup.py
+        '';
+      };
+
+      my_python = mach-nix-utils.mkPython {
+        python = "python38";
+        requirements =
+          (builtins.readFile ./requirements.txt)
+          + ''
             ipython
             setuptools_rust
             pyacvd
@@ -47,85 +69,87 @@
             tensorboard
           '';
 
-          providers.wxpython = "nixpkgs";
+        packagesExtra = [vedo];
 
-          _.enum34.phases = "installPhase";
-          _.enum34.installPhase = "mkdir $out";
+        providers.wxpython = "nixpkgs";
 
-          _.plaidml.pipInstallFlags = "--no-deps";
-          _.plaidml-keras.pipInstallFlags = "--no-deps";
+        _.enum34.phases = "installPhase";
+        _.enum34.installPhase = "mkdir $out";
 
-          _.numpy.propagatedBuildInputs.add = [pkgs.zlib];
+        _.plaidml.pipInstallFlags = "--no-deps";
+        _.plaidml-keras.pipInstallFlags = "--no-deps";
 
-          # overridesPost = [(
-          #   self: super: {
-          #     jax = super.jax.overridePythonAttrs (old: rec{
-          #       propagatedBuildInputs = (old.propagatedBuildInputs or [ ]) ++ [
-          #         self.jaxlib
-          #       ];
-          #     });
-          #   })
-          # ];
-          #       wxpython = super.wxpython.overridePythonAttrs (old: rec{
-          #         DOXYGEN = "${pkgs.doxygen}/bin/doxygen";
+        _.numpy.propagatedBuildInputs.add = [pkgs.zlib];
 
-          #         localPython = self.python.withPackages (ps: with ps; [
-          #           setuptools
-          #           numpy
-          #           six
-          #         ]);
+        # overridesPost = [(
+        #   self: super: {
+        #     jax = super.jax.overridePythonAttrs (old: rec{
+        #       propagatedBuildInputs = (old.propagatedBuildInputs or [ ]) ++ [
+        #         self.jaxlib
+        #       ];
+        #     });
+        #   })
+        # ];
+        #       wxpython = super.wxpython.overridePythonAttrs (old: rec{
+        #         DOXYGEN = "${pkgs.doxygen}/bin/doxygen";
 
-          #         nativeBuildInputs = with pkgs; [
-          #           which
-          #           doxygen
-          #           gtk3
-          #           pkg-config
-          #           autoPatchelfHook
-          #         ] ++ old.nativeBuildInputs;
+        #         localPython = self.python.withPackages (ps: with ps; [
+        #           setuptools
+        #           numpy
+        #           six
+        #         ]);
 
-          #         buildInputs = with pkgs; [
-          #           gtk3
-          #           webkitgtk
-          #           ncurses
-          #           SDL2
-          #           xorg.libXinerama
-          #           xorg.libSM
-          #           xorg.libXxf86vm
-          #           xorg.libXtst
-          #           xorg.xorgproto
-          #           gst_all_1.gstreamer
-          #           gst_all_1.gst-plugins-base
-          #           libGLU
-          #           libGL
-          #           libglvnd
-          #           mesa
-          #         ] ++ old.buildInputs;
+        #         nativeBuildInputs = with pkgs; [
+        #           which
+        #           doxygen
+        #           gtk3
+        #           pkg-config
+        #           autoPatchelfHook
+        #         ] ++ old.nativeBuildInputs;
 
-          #         buildPhase = ''
-          #           ${localPython.interpreter} build.py -v --jobs=8 build_wx
-          #           ${localPython.interpreter} build.py -v dox etg --nodoc sip
-          #           ${localPython.interpreter} build.py -v --jobs=8 build_py
-          #         '';
+        #         buildInputs = with pkgs; [
+        #           gtk3
+        #           webkitgtk
+        #           ncurses
+        #           SDL2
+        #           xorg.libXinerama
+        #           xorg.libSM
+        #           xorg.libXxf86vm
+        #           xorg.libXtst
+        #           xorg.xorgproto
+        #           gst_all_1.gstreamer
+        #           gst_all_1.gst-plugins-base
+        #           libGLU
+        #           libGL
+        #           libglvnd
+        #           mesa
+        #         ] ++ old.buildInputs;
 
-          #         installPhase = ''
-          #           ${localPython.interpreter} setup.py install --skip-build --prefix=$out
-          #         '';
-          #       });
-          #     }
-          #   )
-          # ];
-        };
-        gpu_libs = with pkgs; [
-          cudaPackages_11.cudatoolkit
-          cudaPackages_11.cudatoolkit.lib
-          cudaPackages_11.cudnn
-          ocl-icd
-        ];
-      in
-      {
-        devShell = pkgs.mkShell {
-          name = "InVesalius";
-          buildInputs = with pkgs; [
+        #         buildPhase = ''
+        #           ${localPython.interpreter} build.py -v --jobs=8 build_wx
+        #           ${localPython.interpreter} build.py -v dox etg --nodoc sip
+        #           ${localPython.interpreter} build.py -v --jobs=8 build_py
+        #         '';
+
+        #         installPhase = ''
+        #           ${localPython.interpreter} setup.py install --skip-build --prefix=$out
+        #         '';
+        #       });
+        #     }
+        #   )
+        # ];
+      };
+      gpu_libs = with pkgs; [
+        cudaPackages_11.cudatoolkit
+        cudaPackages_11.cudatoolkit.lib
+        cudaPackages_11.cudnn
+        ocl-icd
+      ];
+    in {
+      devShell = pkgs.mkShell {
+        name = "InVesalius";
+        buildInputs = with pkgs;
+          [
             my_python
             gtk3
             glib
@@ -133,16 +157,17 @@
             clinfo
             zlib
             cmake
-          ] ++ gpu_libs;
+          ]
+          ++ gpu_libs;
 
-          nativeBuildInputs = with pkgs; [
-            gobject-introspection
-            wrapGAppsHook
-          ];
+        nativeBuildInputs = with pkgs; [
+          gobject-introspection
+          wrapGAppsHook
+        ];
 
-          LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath (gpu_libs ++ [ "/run/opengl-driver" ]);
-        };
+        LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath (gpu_libs ++ ["/run/opengl-driver"]);
+      };
 
-        defaultPackage = my_python;
-      });
+      defaultPackage = my_python;
+    });
 }
