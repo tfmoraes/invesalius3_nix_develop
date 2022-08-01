@@ -67,6 +67,7 @@
             onnxruntime-gpu
             itk-elastix
             tensorboard
+            thop
           '';
 
         packagesExtra = [vedo];
