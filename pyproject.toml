@@ -25,9 +25,9 @@ wxPython = "4.2.0"
 torch = "1.11.0"
 pyacvd = "0.2.7"
 scikit-build = "^0.15.0"
-ipython = "^8.4.0"
 
 [tool.poetry.dev-dependencies]
+ipython = "^8.4.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
