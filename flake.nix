@@ -3,7 +3,7 @@
 
   inputs.flake-utils.url = "github:numtide/flake-utils";
   inputs.nixpkgs.url = "github:NixOS/nixpkgs";
-  inputs.poetry2nix_pkgs.url = "github:nix-community/poetry2nix";
+  inputs.poetry2nix_pkgs.url = "github:icetan/poetry2nix";
 
   outputs = {
     self,
@@ -35,8 +35,15 @@
         pipInstallFlags = "--no-deps";
       });
 
+      pyacvd = super.pyacvd.overridePythonAttrs (old: {
+        buildInputs = [self.cython] ++ (old.buildInputs or []);
+      });
+
       wxpython = super.wxpython.overridePythonAttrs (old: {
-        buildInputs = [self.attrdict] ++ (old.buildInputs or []);
+        buildInputs = [
+          self.attrdict
+          self.setuptools
+        ] ++ (old.buildInputs or []);
         nativeBuildInputs = [self.sip] ++ (old.nativeBuildInputs or []);
       });
     };
@@ -57,7 +64,7 @@
         projectDir = ./.;
         preferWheels = true;
         overrides = [poetry2nix.defaultPoetryOverrides customOverrides];
-        python = pkgs.python38;
+        python = pkgs.python310;
       };
   in {
     devShell = pkgs.mkShell {
