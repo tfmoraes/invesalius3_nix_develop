@@ -40,10 +40,12 @@
       });
 
       wxpython = super.wxpython.overridePythonAttrs (old: {
-        buildInputs = [
-          self.attrdict
-          self.setuptools
-        ] ++ (old.buildInputs or []);
+        buildInputs =
+          [
+            self.attrdict
+            self.setuptools
+          ]
+          ++ (old.buildInputs or []);
         nativeBuildInputs = [self.sip] ++ (old.nativeBuildInputs or []);
       });
     };
