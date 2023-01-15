@@ -116,7 +116,7 @@
         projectDir = ./.;
         preferWheels = true;
         overrides = [customOverrides pkgs.poetry2nix.defaultPoetryOverrides];
-        python = pkgs.python310;
+        python = pkgs.python311;
       };
   in {
     devShell = pkgs.mkShell {
