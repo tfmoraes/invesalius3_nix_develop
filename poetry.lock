@@ -476,14 +476,14 @@ tifffile = ["tifffile"]
 
 [[package]]
 name = "ipython"
-version = "8.8.0"
+version = "8.9.0"
 description = "IPython: Productive Interactive Computing"
 category = "dev"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "ipython-8.8.0-py3-none-any.whl", hash = "sha256:da01e6df1501e6e7c32b5084212ddadd4ee2471602e2cf3e0190f4de6b0ea481"},
-    {file = "ipython-8.8.0.tar.gz", hash = "sha256:f3bf2c08505ad2c3f4ed5c46ae0331a8547d36bf4b21a451e8ae80c0791db95b"},
+    {file = "ipython-8.9.0-py3-none-any.whl", hash = "sha256:9c207b0ef2d276d1bfcfeb9a62804336abbe4b170574ea061500952319b1d78c"},
+    {file = "ipython-8.9.0.tar.gz", hash = "sha256:71618e82e6d59487bea059626e7c79fb4a5b760d1510d02fab1160db6fdfa1f7"},
 ]
 
 [package.dependencies]
@@ -495,7 +495,7 @@ jedi = ">=0.16"
 matplotlib-inline = "*"
 pexpect = {version = ">4.3", markers = "sys_platform != \"win32\""}
 pickleshare = "*"
-prompt-toolkit = ">=3.0.11,<3.1.0"
+prompt-toolkit = ">=3.0.30,<3.1.0"
 pygments = ">=2.4.0"
 stack-data = "*"
 traitlets = ">=5"
@@ -1182,47 +1182,53 @@ six = ">=1.5"
 
 [[package]]
 name = "python-gdcm"
-version = "3.0.20"
+version = "3.0.21"
 description = "Grassroots DICOM runtime libraries"
 category = "main"
 optional = false
 python-versions = ">=3.6"
 files = [
-    {file = "python-gdcm-3.0.20.tar.gz", hash = "sha256:eaa15cce108370bd471abf88717299bf50e69c3f821b0a3e9e78d948d0db6b53"},
-    {file = "python_gdcm-3.0.20-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:3e73a00647804c5f56e3834dbfc570c11488327a4a3e06e9ddb4234d7d9d6188"},
-    {file = "python_gdcm-3.0.20-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:8786340f91139b118a2d8b1bf36c8169ad0fc2ee94e577a739d69ab4d6f23853"},
-    {file = "python_gdcm-3.0.20-cp310-cp310-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:f80e3c91a966d4bb2c92aa1b1c57cfb1846621fa50d253792cd68f9615a2074a"},
-    {file = "python_gdcm-3.0.20-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:b9836648476dfa3c74410a2be92d2a248a79a1e5678f9b13729d2146920337c9"},
-    {file = "python_gdcm-3.0.20-cp310-cp310-win32.whl", hash = "sha256:32d64c6d1e2fa0ab258d9c367fb26d77d09961e9f8e833add0b30e7f20a34fc6"},
-    {file = "python_gdcm-3.0.20-cp310-cp310-win_amd64.whl", hash = "sha256:ff5edf5f2b4530eb3ea0107cf0f23af583113bdf1e4f831800e5683a2f621cff"},
-    {file = "python_gdcm-3.0.20-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:c41cc14d0dfc2a0815a25cc676aa55c862b285562f0fca6ab8225d0c628f6c40"},
-    {file = "python_gdcm-3.0.20-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:d868f1612b164595ac179821754dbf8318d7904246fae390cd84f505408112a5"},
-    {file = "python_gdcm-3.0.20-cp311-cp311-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:be3072a1e3d7ebd4b818b940ae5ab2a2b82f96ebec74a8040e1115badf8131aa"},
-    {file = "python_gdcm-3.0.20-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:c1820d948ba33dac7fdffdd4ae44b9208e6a333f1fb7d34231c70f149e7828a5"},
-    {file = "python_gdcm-3.0.20-cp311-cp311-win32.whl", hash = "sha256:78ced3b0b7ddc818a8b7435951d1dd9c24d73f0e0c851e3578e653814586be7f"},
-    {file = "python_gdcm-3.0.20-cp311-cp311-win_amd64.whl", hash = "sha256:f9cb32cc854e38a2f73508bdf6d27470235bb050dcb745f979f8779ed34f3689"},
-    {file = "python_gdcm-3.0.20-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:edf9e801a916d3d1e44aba6a352ab87ed6537e45eea603195214cafd2e17f7a6"},
-    {file = "python_gdcm-3.0.20-cp36-cp36m-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:408e9c11ae15f0f94bba7651af7a3ad9748000027e5077472eb50fa3e1aff2b0"},
-    {file = "python_gdcm-3.0.20-cp36-cp36m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:74f7f6fd1001361f6cb20976480f02784cc0f24aa3348c1edb8f550c3584056f"},
-    {file = "python_gdcm-3.0.20-cp36-cp36m-win32.whl", hash = "sha256:ca96b472a421bea81d34377afa612e230908547d7e1726c771ac98214c763836"},
-    {file = "python_gdcm-3.0.20-cp36-cp36m-win_amd64.whl", hash = "sha256:4328084f555a5199b19f7a0a466c6fe3e322965115b19cb551aa071cf3faf9b2"},
-    {file = "python_gdcm-3.0.20-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:ba03adfd64e7fe588b9b3aca906ce6236d0542c99e21c14f13ab64ba926e19ee"},
-    {file = "python_gdcm-3.0.20-cp37-cp37m-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:4a81d3f7a3fd24573db4862a01990252643c29003c6deec3388ede1500bfae67"},
-    {file = "python_gdcm-3.0.20-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:30d636de4823758e8f776939010112065b5ac0e1a76f1aa4c5f22517de52d402"},
-    {file = "python_gdcm-3.0.20-cp37-cp37m-win32.whl", hash = "sha256:45e7718f8bf4f5b71749e7f977556d98e3d9872122286db602778e351f6f1dd3"},
-    {file = "python_gdcm-3.0.20-cp37-cp37m-win_amd64.whl", hash = "sha256:698fc3520e060e601c2b2fee58226585d3c0e6a876fee698200c146c1310b37b"},
-    {file = "python_gdcm-3.0.20-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:c6bdb6be69b3893969a3434e74856ccc8de921bb37fb8f5fe05358ca8791a0e4"},
-    {file = "python_gdcm-3.0.20-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:7bac6de593a71cc585f7209b624e61553dce112639cdae63ff72bb2e97b584f1"},
-    {file = "python_gdcm-3.0.20-cp38-cp38-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:092f1e2308c6948d0591b831283e0b74287975211d7a35b4e412f1dd8d64de5a"},
-    {file = "python_gdcm-3.0.20-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:57661bb1edd5635470fa937ecb4e450aa09e9b0f182b6de108cd01afc5e3340f"},
-    {file = "python_gdcm-3.0.20-cp38-cp38-win32.whl", hash = "sha256:645cc3f5eebb0e41fda1fe3b4041273d2d95cc0ba2c9b9c9d621537e79f580f1"},
-    {file = "python_gdcm-3.0.20-cp38-cp38-win_amd64.whl", hash = "sha256:fa3b392f44fea80d407c1175ba371c5ba9276611940916b200dcb637839798a2"},
-    {file = "python_gdcm-3.0.20-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:f455b4bbb14ae157d657156032603c4c19c70c18e1c7525d833e4e3b14bfdc5a"},
-    {file = "python_gdcm-3.0.20-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:c7b20a3dff2e3fc8bfebd1bb8caf87ab66dd2567d2f2fc7c3a8338e1afb508e4"},
-    {file = "python_gdcm-3.0.20-cp39-cp39-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:501f300f69099dd1eb9a11a4849b890d9ba9fcfd148731a27a97da714cd12d4d"},
-    {file = "python_gdcm-3.0.20-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:7a795713d55b1fbfa389dbfe6c62ed994dfb02074999746396a6948a066e4a36"},
-    {file = "python_gdcm-3.0.20-cp39-cp39-win32.whl", hash = "sha256:a27d6a84ec15de2dd21c1af6d2f5a14f9e28d565642e82cb0089aa58ae73b35a"},
-    {file = "python_gdcm-3.0.20-cp39-cp39-win_amd64.whl", hash = "sha256:21f6ef305b993821dc74526854fe6d20819f0fd8f1c58f593e7ba57507fcd462"},
+    {file = "python-gdcm-3.0.21.tar.gz", hash = "sha256:5c39d2cda7f9bd49db6f0f9c15f0b60c89b09fe200051e5f8f4b6af07c0632b8"},
+    {file = "python_gdcm-3.0.21-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:c4ec18a66896cff89b7894714da79db49b0e21b03c9e7c3600690a1776260b44"},
+    {file = "python_gdcm-3.0.21-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:e399e766e7e5083469bbb195ee22701962f6c92252ac9843d772ee5f1b3f4474"},
+    {file = "python_gdcm-3.0.21-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:edaceace0e2beca6509ba111defd1747f0b300e922d0206ab22d9b26b11ceeb8"},
+    {file = "python_gdcm-3.0.21-cp310-cp310-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:eeddd159a5bd3e39e7bab402218e0a0b0c90acdffca8fd76b22a87e760b05d9a"},
+    {file = "python_gdcm-3.0.21-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a1196b5954f70a5704d049c2c42aa91aaca21d6ce59001deb7ddd092cf2e856e"},
+    {file = "python_gdcm-3.0.21-cp310-cp310-win32.whl", hash = "sha256:67505d6eafc2fe39c3d810d8b4e3112f1bd69aa60975c78647fb113f3257918f"},
+    {file = "python_gdcm-3.0.21-cp310-cp310-win_amd64.whl", hash = "sha256:306b77d937e45a61f6988b65f70a51aef00bb7f15c2f69a1283d9063c85025e9"},
+    {file = "python_gdcm-3.0.21-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:906c80aaaab1614dd997b79b1b04cdc9323e65f0f9370d988f4e9a4f73c53d23"},
+    {file = "python_gdcm-3.0.21-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:84044241c1b61ea985661da3a2c26fd49a757be96cfbe1545ee2bc4ca2d5a392"},
+    {file = "python_gdcm-3.0.21-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:66e6dda87aa94afa88e27cbcafd96009885a6e22ecb9ff1db916cbb18ca5e309"},
+    {file = "python_gdcm-3.0.21-cp311-cp311-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:68fa97348b9d707795522c361dd51c3e720ca926979b26894e3b07d620968029"},
+    {file = "python_gdcm-3.0.21-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:174c4e60e89aa0dcdc593e43086e09bc2ebb7eb7ed47d40a90414fa36edd36ae"},
+    {file = "python_gdcm-3.0.21-cp311-cp311-win32.whl", hash = "sha256:fb45b09ee631b7d29b2d0fdee20950397a08b2a8476aea9db2b0c4a105a6c43d"},
+    {file = "python_gdcm-3.0.21-cp311-cp311-win_amd64.whl", hash = "sha256:4bd3788dd5e0e4a757ecec181c162411769e4c056ae49100bcf2db5d969548d3"},
+    {file = "python_gdcm-3.0.21-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:d3d6fbf51f79f2f5c0e697265aad18caf4df3366f59d68a29488aa6a43e48c67"},
+    {file = "python_gdcm-3.0.21-cp36-cp36m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:1de8aa5c696257cdd11e0b8f8abbfebcabdacf0bef18bc3a364871f965fc66c7"},
+    {file = "python_gdcm-3.0.21-cp36-cp36m-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:76dda06528602b99e9268c8ac7c74753cb479cdb92b28d504ebc1683e0ed1bca"},
+    {file = "python_gdcm-3.0.21-cp36-cp36m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:8b1bef4e97d1f0da273448a86098051d2b527517fd64ec07b5a07756b769af3b"},
+    {file = "python_gdcm-3.0.21-cp36-cp36m-win32.whl", hash = "sha256:e14357d1666971db4b41f154b45c69757fd762f3e58de7960895a3fd0c216e7f"},
+    {file = "python_gdcm-3.0.21-cp36-cp36m-win_amd64.whl", hash = "sha256:000461fbf61f287ff56868b1b23fa6a8ee9844af89d72b8037ee2db9e56f437a"},
+    {file = "python_gdcm-3.0.21-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:9a4ff8e927b64268658a8ef77fd64d5ac7f80fb073a6c71ec0526cc274d61a83"},
+    {file = "python_gdcm-3.0.21-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:9dee6e3065159a44c0d166a432a83b7ac61e4dbe0b354ef0789e185cf7c4600b"},
+    {file = "python_gdcm-3.0.21-cp37-cp37m-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:2e80bb8ce2a3dcdf060667c9cdf4b31c23c5dad59f33c0fba1da40995bfceb24"},
+    {file = "python_gdcm-3.0.21-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:f5a34dc79512ab4c25184a2bf460484b4da9b88684f7c69054437e70dba501e4"},
+    {file = "python_gdcm-3.0.21-cp37-cp37m-win32.whl", hash = "sha256:a3f3ed5904d08cd4b106c352dc2638a723ae551b93557c20acdbc0e474602a1f"},
+    {file = "python_gdcm-3.0.21-cp37-cp37m-win_amd64.whl", hash = "sha256:88eb260245ad82b72f6381f6e746864f9b061bd9423378fa0d94c07fa6b782eb"},
+    {file = "python_gdcm-3.0.21-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:6eb0be633254acc77712b59915917081c6fe85fbca6c7ffa6d5fd34b067ba0c1"},
+    {file = "python_gdcm-3.0.21-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:f2187db18f996bd33a6d7bc9d93a80726413dd167b21d8106f4f307a0ec6c4b9"},
+    {file = "python_gdcm-3.0.21-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:f2c25c2029402f1f75aad1568686120a8e76d6f24c4a83e87895c9c08967c388"},
+    {file = "python_gdcm-3.0.21-cp38-cp38-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:87b34d1c95c63a1fad0c96f8def55ccd2d69bf26bc94830429cdbb8ba8b7a68b"},
+    {file = "python_gdcm-3.0.21-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:d717d3d0c0d08672dca414fb7fad7cdfc7cc2085f8869a56c482e134fdf38a94"},
+    {file = "python_gdcm-3.0.21-cp38-cp38-win32.whl", hash = "sha256:2db5da0c39405c7a2c1328a9921c501691ae8e8fbf186b54b33fe663ebe24010"},
+    {file = "python_gdcm-3.0.21-cp38-cp38-win_amd64.whl", hash = "sha256:a1da895fcaa4672524c18c7956614f78089bbe4ad91c8ea6a63bfe2aa213acf9"},
+    {file = "python_gdcm-3.0.21-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:cb12443f3be2eb7ce5122d45d6f3b47e70bbe626c2c16fceba0ec297c6fbc720"},
+    {file = "python_gdcm-3.0.21-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:2c8d5d4c9c7843902cc55f80a96f6cd100e976a29cc061d19c7a292fb9e5c76f"},
+    {file = "python_gdcm-3.0.21-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:6997164def95b1bc0d7862ba21fa0c9bef948e37c14e63a6a1e79c686b6cb2f8"},
+    {file = "python_gdcm-3.0.21-cp39-cp39-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:ebe9765bcf20e7ea1f6a853eb122efb2299051852049f28392834bbd2e8cf3a1"},
+    {file = "python_gdcm-3.0.21-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:4358a1affe86babdbcf20b286461f55ded427b8670946ca1f671bb92b132ae51"},
+    {file = "python_gdcm-3.0.21-cp39-cp39-win32.whl", hash = "sha256:9af0e171d8623c8b7fea1e2e748b009a9d5810a22c822b029249e0d988c74880"},
+    {file = "python_gdcm-3.0.21-cp39-cp39-win_amd64.whl", hash = "sha256:66c03ec8545a850db6c4178e4de1d3dc838a88e95ce2d46a51c840213df44355"},
 ]
 
 [[package]]
@@ -1694,4 +1700,4 @@ six = "*"
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8,<3.12"
-content-hash = "4993bf6185eb84b26e803fd05e7e5f24558f0c31b991752a2e0eccf0bff67ba5"
+content-hash = "ecac02fcf6e8f506532bc80709ad453ee973c7e27907aaea5ecf686195cd8ffc"
