@@ -5,27 +5,26 @@ description = ""
 authors = ["Thiago Franco de Moraes <totonixsame@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = ">=3.8,<3.12"
+python = ">=3.10,<3.12"
 Cython = "^0.29.33"
 Pillow = "^9.4.0"
 PyPubSub = "^4.0.3"
-configparser = "^5.0.1"
 h5py = "^3.8.0"
-imageio = "^2.24.0"
-nibabel = "^5.0.0"
-numpy = "^1.24.1"
+imageio = "^2.26.0"
+nibabel = "^5.0.1"
+numpy = "^1.24.2"
 psutil = "^5.9.4"
 pyserial = "^3.5"
 python-gdcm = "^3.0.21"
-scikit-image = "^0.19.3"
-scipy = "^1.10.0"
-vtk = "^9.2.5"
+scikit-image = "^0.20.0"
+scipy = "^1.10.1"
+vtk = "^9.2.6"
 wxPython = "^4.2.0"
 torch = "1.13.1"
 pyacvd = "^0.2.9"
 
 [tool.poetry.dev-dependencies]
-ipython = "^8.9.0"
+ipython = "^8.11.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
