@@ -87,28 +87,15 @@
       });
 
       torch = super.torch.overridePythonAttrs (old: {
-        nativeBuildInputs =
-          old.nativeBuildInputs
-          or []
+        # torch has an auto-magical way to locate the cuda libraries from site-packages.
+        autoPatchelfIgnoreMissingDeps = true;
+        propagatedBuildInputs =
+          (old.propagatedBuildInputs or [])
           ++ [
-            pkgs.autoPatchelfHook
-            pkgs.cudaPackages.autoAddOpenGLRunpathHook
+            self.numpy
           ];
-        buildInputs =
-          old.buildInputs
-          or []
-          ++ [
-            self.nvidia-cudnn-cu11
-            self.nvidia-cuda-nvrtc-cu11
-            self.nvidia-cuda-runtime-cu11
-            self.nvidia-cublas-cu11
-          ];
-        postInstall = ''
-          addAutoPatchelfSearchPath "${self.nvidia-cublas-cu11}/${self.python.sitePackages}/nvidia/cublas/lib"
-          addAutoPatchelfSearchPath "${self.nvidia-cudnn-cu11}/${self.python.sitePackages}/nvidia/cudnn/lib"
-          addAutoPatchelfSearchPath "${self.nvidia-cuda-nvrtc-cu11}/${self.python.sitePackages}/nvidia/cuda_nvrtc/lib"
-        '';
       });
+
       triton = super.triton.overridePythonAttrs (old: {
         propagatedBuildInputs = builtins.filter (e: e.pname != "torch") old.propagatedBuildInputs;
         pipInstallFlags = ["--no-deps"];
@@ -125,28 +112,27 @@
       ocl-icd
     ];
 
-    my_env =
-      (pkgs.poetry2nix.mkPoetryEnv
+    my_env = (pkgs.poetry2nix.mkPoetryEnv
       {
         projectDir = ./.;
         preferWheels = true;
         overrides = [customOverrides pkgs.poetry2nix.defaultPoetryOverrides];
         python = pkgs.python311;
-      }).override {ignoreCollisions = true;};
+      })
+    .override {ignoreCollisions = true;};
   in {
     devShell = pkgs.mkShell {
-      buildInputs = with pkgs;
-        [
-          poetry
-          my_env
-          gtk3
-          glib
-          gsettings-desktop-schemas
-          clinfo
-          zlib
-          cmake
-        ]
-        ++ gpu_libs;
+      buildInputs = with pkgs; [
+        poetry
+        my_env
+        gtk3
+        glib
+        gsettings-desktop-schemas
+        clinfo
+        zlib
+        cmake
+      ];
+      # ++ gpu_libs;
       LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath ["/run/opengl-driver"];
     };
     defaultPackage = my_env;
