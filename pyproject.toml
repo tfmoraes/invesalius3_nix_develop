@@ -20,7 +20,7 @@ scikit-image = "^0.20.0"
 scipy = "^1.10.1"
 vtk = "^9.2.6"
 wxPython = "^4.2.0"
-torch = "1.13.1"
+torch = "2.0.0"
 pyacvd = "^0.2.9"
 
 [tool.poetry.dev-dependencies]
