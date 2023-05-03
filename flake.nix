@@ -43,63 +43,7 @@
 
       wxpython = pkgs.python311Packages.wxPython_4_2;
 
-      lit = super.lit.overridePythonAttrs (old: {
-        buildInputs = [self.setuptools];
-      });
-
       pybind11 = pkgs.python311Packages.pybind11;
-
-      # The following are dependencies of torch >= 2.0.0.
-      # torch doesn't officially support system CUDA, unless you build it yourself.
-      nvidia-cudnn-cu11 = super.nvidia-cudnn-cu11.overridePythonAttrs (attrs: {
-        autoPatchelfIgnoreMissingDeps = true;
-        # (Bytecode collision happens with nvidia-cuda-nvrtc-cu11.)
-        postFixup = ''
-          rm -r $out/${self.python.sitePackages}/nvidia/{__pycache__,__init__.py}
-        '';
-        propagatedBuildInputs =
-          attrs.propagatedBuildInputs
-          or []
-          ++ [
-            self.nvidia-cublas-cu11
-          ];
-      });
-
-      nvidia-cuda-nvrtc-cu11 = super.nvidia-cuda-nvrtc-cu11.overridePythonAttrs (_: {
-        # (Bytecode collision happens with nvidia-cudnn-cu11.)
-        postFixup = ''
-          rm -r $out/${self.python.sitePackages}/nvidia/{__pycache__,__init__.py}
-        '';
-      });
-
-      nvidia-cusolver-cu11 = super.nvidia-cusolver-cu11.overridePythonAttrs (attrs: {
-        autoPatchelfIgnoreMissingDeps = true;
-        # (Bytecode collision happens with nvidia-cusolver-cu11.)
-        postFixup = ''
-          rm -r $out/${self.python.sitePackages}/nvidia/{__pycache__,__init__.py}
-        '';
-        propagatedBuildInputs =
-          attrs.propagatedBuildInputs
-          or []
-          ++ [
-            self.nvidia-cublas-cu11
-          ];
-      });
-
-      torch = super.torch.overridePythonAttrs (old: {
-        # torch has an auto-magical way to locate the cuda libraries from site-packages.
-        autoPatchelfIgnoreMissingDeps = true;
-        propagatedBuildInputs =
-          (old.propagatedBuildInputs or [])
-          ++ [
-            self.numpy
-          ];
-      });
-
-      triton = super.triton.overridePythonAttrs (old: {
-        propagatedBuildInputs = builtins.filter (e: e.pname != "torch") old.propagatedBuildInputs;
-        pipInstallFlags = ["--no-deps"];
-      });
     };
 
     gpu_libs = with pkgs; [
@@ -133,7 +77,11 @@
         cmake
       ];
       # ++ gpu_libs;
-      LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath ["/run/opengl-driver"];
+      LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
+        "/run/opengl-driver"
+        "${my_env}/${my_env.python.sitePackages}/nvidia/cudnn"
+        "${my_env}/${my_env.python.sitePackages}/nvidia/cublas"
+      ];
     };
     defaultPackage = my_env;
   }));
