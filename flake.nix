@@ -41,7 +41,16 @@
         buildInputs = [self.cython] ++ (old.buildInputs or []);
       });
 
-      wxpython = pkgs.python311Packages.wxPython_4_2;
+      # wxpython = pkgs.python311Packages.wxPython_4_2;
+      wxpython = super.wxpython.overridePythonAttrs (old: {
+        buildInputs =
+          [
+            self.attrdict
+            self.setuptools
+          ]
+          ++ (old.buildInputs or []);
+        nativeBuildInputs = [self.sip] ++ (old.nativeBuildInputs or []);
+      });
 
       pybind11 = pkgs.python311Packages.pybind11;
     };
