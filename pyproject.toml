@@ -12,10 +12,10 @@ PyPubSub = "^4.0.3"
 h5py = "^3.8.0"
 imageio = "^2.26.0"
 nibabel = "^5.0.1"
-numpy = "^1.24.2"
+numpy = "^1.24.3"
 psutil = "^5.9.4"
 pyserial = "^3.5"
-python-gdcm = "^3.0.21"
+python-gdcm = "^3.0.22"
 scikit-image = "^0.20.0"
 scipy = "^1.10.1"
 vtk = "^9.2.6"
@@ -24,7 +24,7 @@ torch = "2.0.0"
 pyacvd = "^0.2.9"
 
 [tool.poetry.dev-dependencies]
-ipython = "^8.11.0"
+ipython = "^8.13.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
