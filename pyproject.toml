@@ -6,7 +6,7 @@ authors = ["Thiago Franco de Moraes <totonixsame@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.12"
-Cython = "^0.29.36"
+Cython = "^3.0.0"
 Pillow = "^10.0.0"
 PyPubSub = "^4.0.3"
 h5py = "^3.9.0"
@@ -20,8 +20,20 @@ scikit-image = "^0.20.0"
 scipy = "^1.11.1"
 vtk = "^9.2.6"
 wxPython = "^4.2.1"
-torch = "2.0.0"
+torch = "2.0.1"
 pyacvd = "^0.2.9"
+nvidia-cublas-cu11 = { version = "11.10.3.66", platform = 'linux' }
+nvidia-cuda-cupti-cu11 = { version = "11.7.101", platform = 'linux' }
+nvidia-cuda-nvrtc-cu11 = { version = "11.7.99", platform = 'linux' }
+nvidia-cuda-runtime-cu11 = { version = "11.7.99", platform = 'linux' }
+nvidia-cudnn-cu11 = { version = "8.5.0.96", platform = 'linux' }
+nvidia-cufft-cu11 = { version = "10.9.0.58", platform = 'linux' }
+nvidia-curand-cu11 = { version = "10.2.10.91", platform = 'linux' }
+nvidia-cusolver-cu11 = { version = "11.4.0.1", platform = 'linux' }
+nvidia-cusparse-cu11 = { version = "11.7.4.91", platform = 'linux' }
+nvidia-nccl-cu11 = { version = "2.14.3", platform = 'linux' }
+nvidia-nvtx-cu11 = { version = "11.7.91", platform = 'linux' }
+triton = { version = "2.0.0", platform = 'linux' }
 
 [tool.poetry.dev-dependencies]
 ipython = "^8.14.0"
