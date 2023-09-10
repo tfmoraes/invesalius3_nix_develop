@@ -34,6 +34,7 @@ nvidia-cusparse-cu11 = { version = "11.7.4.91", platform = 'linux' }
 nvidia-nccl-cu11 = { version = "2.14.3", platform = 'linux' }
 nvidia-nvtx-cu11 = { version = "11.7.91", platform = 'linux' }
 triton = { version = "2.0.0", platform = 'linux' }
+pynetdicom = "^2.0.2"
 
 [tool.poetry.dev-dependencies]
 ipython = "^8.14.0"
