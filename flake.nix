@@ -2,9 +2,9 @@
   description = "Application packaged using poetry2nix";
 
   inputs.flake-utils.url = "github:numtide/flake-utils";
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   inputs.poetry2nix = {
-    url = "github:nix-community/poetry2nix";
+    url = "github:nix-community/poetry2nix/";
     inputs = {
       nixpkgs.follows = "nixpkgs";
       flake-utils.follows = "flake-utils";
@@ -43,6 +43,42 @@
           buildInputs = [ self.cython ] ++ (old.buildInputs or [ ]);
         });
 
+        nvidia-cusparse-cu12 = super.nvidia-cusparse-cu12.overridePythonAttrs(old: {
+          autoPatchelfIgnoreMissingDeps = true;
+          buildInputs = [
+            self.nvidia-nvjitlink-cu12
+          ] ++ (old.buildInputs or [ ]);
+        });
+
+      nvidia-cudnn-cu12 = super.nvidia-cudnn-cu12.overridePythonAttrs (attrs: {
+        autoPatchelfIgnoreMissingDeps = true;
+        # (Bytecode collision happens with nvidia-cuda-nvrtc-cu12.)
+        postFixup = ''
+          rm -r $out/${self.python.sitePackages}/nvidia/{__pycache__,__init__.py}
+        '';
+        propagatedBuildInputs = attrs.propagatedBuildInputs or [ ] ++ [
+          self.nvidia-cublas-cu12
+        ];
+      });
+
+      nvidia-cuda-nvrtc-cu12 = super.nvidia-cuda-nvrtc-cu12.overridePythonAttrs (_: {
+        # (Bytecode collision happens with nvidia-cudnn-cu12.)
+        postFixup = ''
+          rm -r $out/${self.python.sitePackages}/nvidia/{__pycache__,__init__.py}
+        '';
+      });
+
+      nvidia-cusolver-cu12 = super.nvidia-cusolver-cu12.overridePythonAttrs (attrs: {
+        autoPatchelfIgnoreMissingDeps = true;
+        # (Bytecode collision happens with nvidia-cusolver-cu12.)
+        postFixup = ''
+          rm -r $out/${self.python.sitePackages}/nvidia/{__pycache__,__init__.py}
+        '';
+        propagatedBuildInputs = attrs.propagatedBuildInputs or [ ] ++ [
+          self.nvidia-cublas-cu12
+        ];
+      });
+
         # wxpython = pkgs.python311Packages.wxPython_4_2;
         wxpython = super.wxpython.overridePythonAttrs (old: {
           buildInputs =
@@ -59,17 +95,17 @@
         torch = super.torch.overridePythonAttrs
           (old: {
             buildInputs = [
-              self.nvidia-cublas-cu11
-              self.nvidia-cuda-cupti-cu11
-              self.nvidia-cuda-nvrtc-cu11
-              self.nvidia-cuda-runtime-cu11
-              self.nvidia-cudnn-cu11
-              self.nvidia-cufft-cu11
-              self.nvidia-curand-cu11
-              self.nvidia-cusolver-cu11
-              self.nvidia-cusparse-cu11
-              self.nvidia-nccl-cu11
-              self.nvidia-nvtx-cu11
+              self.nvidia-cublas-cu12
+              self.nvidia-cuda-cupti-cu12
+              self.nvidia-cuda-nvrtc-cu12
+              self.nvidia-cuda-runtime-cu12
+              self.nvidia-cudnn-cu12
+              self.nvidia-cufft-cu12
+              self.nvidia-curand-cu12
+              self.nvidia-cusolver-cu12
+              self.nvidia-cusparse-cu12
+              self.nvidia-nccl-cu12
+              self.nvidia-nvtx-cu12
               self.triton
             ] ++ (old.buildInputs or [ ]);
           });
@@ -109,6 +145,8 @@
             "/run/opengl-driver"
             "${my_env}/${my_env.python.sitePackages}/nvidia/cudnn"
             "${my_env}/${my_env.python.sitePackages}/nvidia/cublas"
+            "${my_env}/${my_env.python.sitePackages}/nvidia/nvjitlink"
+            "${my_env}/${my_env.python.sitePackages}/nvidia/cusparse"
           ];
         };
         defaultPackage = my_env;
