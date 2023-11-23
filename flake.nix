@@ -22,7 +22,7 @@
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
-        overlays = [ poetry2nix.overlay ];
+        overlays = [ poetry2nix.overlays.default ];
       };
 
       customOverrides = self: super: {
